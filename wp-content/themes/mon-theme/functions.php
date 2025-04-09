@@ -3,13 +3,48 @@
 // Enregistrer les menus
 
 // Ajouter le support des images à la une
-function mon_theme_register_menus() {
+function register_my_menus() {
     register_nav_menus(array(
-        'menu-principal' => __('Menu Principal', 'mon-theme'),
+        'header-menu' => __('Header Menu', 'your-theme'),
     ));
 }
-add_action('after_setup_theme', 'mon_theme_register_menus');
-require_once get_template_directory() . '/class-custom-nav-walker.php';
+add_action('init', 'register_my_menus');
+function theme_custom_logo_setup() {
+    add_theme_support('custom-logo', array(
+        'height'      => 100,
+        'width'       => 250,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ));
+}
+add_action('after_setup_theme', 'theme_custom_logo_setup');
+add_theme_support('custom-header', array(
+    'default-image' => get_template_directory_uri() . '/images/default-header.jpg',
+    'width'         => 1920,
+    'height'        => 500,
+    'flex-width'    => true,
+    'flex-height'   => true,
+));
+class Custom_Nav_Walker extends Walker_Nav_Menu {
+    function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+        $icon_class = get_field('menu_icon', $item); // Get custom field from ACF
+        $output .= '<li class="menu-item"><a href="' . esc_url($item->url) . '">';
+        
+        if ($icon_class) {
+            $output .= '<i class="' . esc_attr($icon_class) . ' navicon"></i> ';
+        }
+
+        $output .= '<span>' . esc_html($item->title) . '</span></a></li>';
+    }
+}
+add_theme_support('custom-header', array(
+    'default-image' => get_template_directory_uri() . '/images/default-header.jpg',
+    'width'         => 1920,
+    'height'        => 500,
+    'flex-width'    => true,
+    'flex-height'   => true,
+));
+
 function mon_theme_support() {
     add_theme_support('post-thumbnails'); // Permet d'ajouter des images à la une
 }
