@@ -25,14 +25,15 @@
 
     <!-- Navigation menu -->
     <nav id="navmenu" class="navmenu">
-        <?php
-        wp_nav_menu(array(
-            'theme_location' => 'header-menu',
-            'menu_class'     => 'navmenu-list',
-            'container'      => false,
-            'walker'         => new Custom_Nav_Walker(), // Use custom walker for icons
-        ));
-        ?>
+    <?php 
+wp_nav_menu(array(
+    'theme_location' => 'header-menu',
+    'menu_class'     => 'navmenu-list',
+    'container'      => false,
+    'walker'         => new Custom_Nav_Walker(),
+));
+?>
+
     </nav>
 </header>
 

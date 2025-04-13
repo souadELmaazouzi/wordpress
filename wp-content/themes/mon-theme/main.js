@@ -244,3 +244,23 @@
 
   });
 })();
+( function( $ ) {
+  wp.customize( 'service_section_title', function( value ) {
+      value.bind( function( newValue ) {
+          $( '#services h2.text-center' ).text( newValue );
+      });
+  });
+  
+  wp.customize( 'service_section_description', function( value ) {
+      value.bind( function( newValue ) {
+          $( '.service-description' ).text( newValue );
+      });
+  });
+
+  wp.customize( 'service_section_image', function( value ) {
+      value.bind( function( newValue ) {
+          $( '.service-image img' ).attr( 'src', newValue );
+      });
+  });
+} )( jQuery );
+
