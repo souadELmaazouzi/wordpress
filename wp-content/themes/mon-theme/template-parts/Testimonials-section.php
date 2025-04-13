@@ -49,7 +49,7 @@
                   <h3><?php echo esc_html($testimonial_name); ?></h3>
                   <h4><?php echo esc_html($testimonial_position); ?></h4>
                   <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                   
                   </div>
                 </div>
               </div>

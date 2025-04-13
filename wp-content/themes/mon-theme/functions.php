@@ -1003,3 +1003,43 @@ function customize_testimonials_section($wp_customize) {
     }
 }
 add_action('customize_register', 'customize_testimonials_section');
+function enqueue_contact_form_scripts() {
+    wp_enqueue_script( 'contact-form-ajax', get_template_directory_uri() . '/js/contact-form.js', array('jquery'), null, true );
+    wp_localize_script( 'contact-form-ajax', 'contact_form_ajax_obj', array(
+        'ajaxurl' => admin_url( 'admin-ajax.php' ),
+    ));
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_contact_form_scripts' );
+function handle_contact_form_submission() {
+    // Sanitize and get form data
+    $name    = sanitize_text_field($_POST['name']);
+    $email   = sanitize_email($_POST['email']);
+    $subject = sanitize_text_field($_POST['subject']);
+    $message = sanitize_textarea_field($_POST['message']);
+
+    // Email recipient
+    $to = "your-email@example.com"; // Replace with your email
+    $headers = array(
+        'Content-Type' => 'text/html; charset=UTF-8',
+        'From' => $email,
+        'Reply-To' => $email,
+    );
+
+    // Email subject and body
+    $email_subject = "New Message from $name: $subject";
+    $email_body = "<p><strong>Name:</strong> $name</p>";
+    $email_body .= "<p><strong>Email:</strong> $email</p>";
+    $email_body .= "<p><strong>Message:</strong><br>$message</p>";
+
+    // Send email
+    if (wp_mail($to, $email_subject, $email_body, $headers)) {
+        echo 'Your message has been sent. Thank you!';
+    } else {
+        echo 'There was an error sending your message.';
+    }
+
+    // Always die to terminate the Ajax request
+    wp_die();
+}
+add_action('wp_ajax_send_contact_form', 'handle_contact_form_submission'); 
+add_action('wp_ajax_nopriv_send_contact_form', 'handle_contact_form_submission');

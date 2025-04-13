@@ -1,0 +1,1 @@
+[13-Apr-2025 04:33:26 UTC] PHP Warning:  foreach() argument must be of type array|object, bool given in /Applications/XAMPP/xamppfiles/htdocs/wordpress/wp-content/themes/mon-theme/functions.php on line 70
