@@ -66,5 +66,5 @@ get_header();  // Include header template
 <!-- Preloader -->
 <div id="preloader"></div>
 <?php
-get_footer();  // Include footer template
+get_footer();  // Include footer template hhhhh
 
