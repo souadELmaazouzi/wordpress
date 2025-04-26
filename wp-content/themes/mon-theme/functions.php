@@ -918,6 +918,7 @@ function customContact_customize_register($wp_customize) {
     $wp_customize->add_setting('contact_email', array(
         'default' => __('info@example.com', 'your-theme'),
         'transport' => 'refresh',
+        'sanitize_callback' => 'sanitize_email', // Important for email validation
     ));
     $wp_customize->add_control('contact_email', array(
         'label' => __('Contact Email', 'your-theme'),
@@ -926,32 +927,32 @@ function customContact_customize_register($wp_customize) {
     ));
 }
 add_action('customize_register', 'customContact_customize_register');
-function customize_testimonials_section($wp_customize) {
+function customize_Projects_section($wp_customize) {
     // Add Section for Testimonials
-    $wp_customize->add_section('testimonials_section', array(
-        'title'    => __('Testimonials', 'your-theme'),
+    $wp_customize->add_section('Projects_section', array(
+        'title'    => __('Projets', 'your-theme'),
         'priority' => 30,
     ));
 
     // Add Title Setting
-    $wp_customize->add_setting('testimonials_title', array(
-        'default'   => 'Testimonials',
+    $wp_customize->add_setting('Projects_title', array(
+        'default'   => 'Projects',
         'transport' => 'refresh',
     ));
-    $wp_customize->add_control('testimonials_title', array(
+    $wp_customize->add_control('Projects_title', array(
         'label'    => __('Section Title', 'your-theme'),
-        'section'  => 'testimonials_section',
+        'section'  => 'Projects_section',
         'type'     => 'text',
     ));
 
     // Add Description Setting
-    $wp_customize->add_setting('testimonials_description', array(
+    $wp_customize->add_setting('Project_description', array(
         'default'   => 'Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit',
         'transport' => 'refresh',
     ));
-    $wp_customize->add_control('testimonials_description', array(
+    $wp_customize->add_control('Project_description', array(
         'label'    => __('Section Description', 'your-theme'),
-        'section'  => 'testimonials_section',
+        'section'  => 'Projects_section',
         'type'     => 'text',
     ));
 
@@ -963,8 +964,8 @@ function customize_testimonials_section($wp_customize) {
             'transport' => 'refresh',
         ));
         $wp_customize->add_control('testimonial_' . $i . '_text', array(
-            'label'    => __('Testimonial ' . $i . ' Text', 'your-theme'),
-            'section'  => 'testimonials_section',
+            'label'    => __('application  ' . $i . ' Text', 'your-theme'),
+            'section'  => 'Projects_section',
             'type'     => 'textarea',
         ));
 
@@ -974,8 +975,8 @@ function customize_testimonials_section($wp_customize) {
             'transport' => 'refresh',
         ));
         $wp_customize->add_control('testimonial_' . $i . '_name', array(
-            'label'    => __('Testimonial ' . $i . ' Name', 'your-theme'),
-            'section'  => 'testimonials_section',
+            'label'    => __('app name  ' . $i . ' Name', 'your-theme'),
+            'section'  => 'Projects_section',
             'type'     => 'text',
         ));
 
@@ -985,8 +986,8 @@ function customize_testimonials_section($wp_customize) {
             'transport' => 'refresh',
         ));
         $wp_customize->add_control('testimonial_' . $i . '_position', array(
-            'label'    => __('Testimonial ' . $i . ' Position', 'your-theme'),
-            'section'  => 'testimonials_section',
+            'label'    => __('Type application ' . $i . ' Position', 'your-theme'),
+            'section'  => 'Projects_section',
             'type'     => 'text',
         ));
 
@@ -996,13 +997,13 @@ function customize_testimonials_section($wp_customize) {
             'transport' => 'refresh',
         ));
         $wp_customize->add_control('testimonial_' . $i . '_image', array(
-            'label'    => __('Testimonial ' . $i . ' Image URL', 'your-theme'),
-            'section'  => 'testimonials_section',
+            'label'    => __('image ' . $i . ' Image URL', 'your-theme'),
+            'section'  => 'Projects_section',
             'type'     => 'url',
         ));
     }
 }
-add_action('customize_register', 'customize_testimonials_section');
+add_action('customize_register', 'customize_Projects_section');
 function enqueue_contact_form_scripts() {
     wp_enqueue_script( 'contact-form-ajax', get_template_directory_uri() . '/js/contact-form.js', array('jquery'), null, true );
     wp_localize_script( 'contact-form-ajax', 'contact_form_ajax_obj', array(

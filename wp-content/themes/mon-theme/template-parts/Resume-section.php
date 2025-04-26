@@ -21,54 +21,52 @@
         <!-- Education & Experience would go here in the same way -->
         <h3 class="resume-title">Education</h3>
 
-<div class="resume-item">
-  <h4><?php echo get_theme_mod('resume_edu1_title', 'Master of Fine Arts & Graphic Design'); ?></h4>
-  <h5><?php echo get_theme_mod('resume_edu1_years', '2015 - 2016'); ?></h5>
-  <p><em><?php echo get_theme_mod('resume_edu1_school', 'Rochester Institute of Technology, Rochester, NY'); ?></em></p>
-  <p><?php echo get_theme_mod('resume_edu1_desc', 'Qui deserunt veniam...'); ?></p>
-</div>
+        <div class="resume-item">
+          <h4><?php echo get_theme_mod('resume_edu1_title', 'Master of Fine Arts & Graphic Design'); ?></h4>
+          <h5><?php echo get_theme_mod('resume_edu1_years', '2015 - 2016'); ?></h5>
+          <p><em><?php echo get_theme_mod('resume_edu1_school', 'Rochester Institute of Technology, Rochester, NY'); ?></em></p>
+          <p><?php echo get_theme_mod('resume_edu1_desc', 'Qui deserunt veniam...'); ?></p>
+        </div>
 
-<div class="resume-item">
-  <h4><?php echo get_theme_mod('resume_edu2_title', 'Bachelor of Fine Arts & Graphic Design'); ?></h4>
-  <h5><?php echo get_theme_mod('resume_edu2_years', '2010 - 2014'); ?></h5>
-  <p><em><?php echo get_theme_mod('resume_edu2_school', 'Rochester Institute of Technology, Rochester, NY'); ?></em></p>
-  <p><?php echo get_theme_mod('resume_edu2_desc', 'Quia nobis sequi est occaecati aut...'); ?></p>
-</div>
-<h3 class="resume-title">Professional Experience</h3>
+        <div class="resume-item">
+          <h4><?php echo get_theme_mod('resume_edu2_title', 'Bachelor of Fine Arts & Graphic Design'); ?></h4>
+          <h5><?php echo get_theme_mod('resume_edu2_years', '2010 - 2014'); ?></h5>
+          <p><em><?php echo get_theme_mod('resume_edu2_school', 'Rochester Institute of Technology, Rochester, NY'); ?></em></p>
+          <p><?php echo get_theme_mod('resume_edu2_desc', 'Quia nobis sequi est occaecati aut...'); ?></p>
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+      <h3 class="resume-title">Professional Experience</h3>
 
-<div class="resume-item">
-  <h4><?php echo get_theme_mod('resume_exp1_title', 'Senior graphic design specialist'); ?></h4>
-  <h5><?php echo get_theme_mod('resume_exp1_years', '2019 - Present'); ?></h5>
-  <p><em><?php echo get_theme_mod('resume_exp1_company', 'Experion, New York, NY'); ?></em></p>
-  <ul>
-    <?php
-    $exp1_tasks = explode("\n", get_theme_mod('resume_exp1_tasks'));
-    foreach ($exp1_tasks as $task) {
-        echo '<li>' . esc_html(trim($task)) . '</li>';
-    }
-    ?>
-  </ul>
-</div>
-
-<div class="resume-item">
-  <h4><?php echo get_theme_mod('resume_exp2_title', 'Graphic design specialist'); ?></h4>
-  <h5><?php echo get_theme_mod('resume_exp2_years', '2017 - 2018'); ?></h5>
-  <p><em><?php echo get_theme_mod('resume_exp2_company', 'Stepping Stone Advertising, New York, NY'); ?></em></p>
-  <ul>
-    <?php
-    $exp2_tasks = explode("\n", get_theme_mod('resume_exp2_tasks'));
-    foreach ($exp2_tasks as $task) {
-        echo '<li>' . esc_html(trim($task)) . '</li>';
-    }
-    ?>
-  </ul>
-</div>
-
+      <div class="resume-item">
+        <h4><?php echo get_theme_mod('resume_exp1_title', 'Senior graphic design specialist'); ?></h4>
+        <h5><?php echo get_theme_mod('resume_exp1_years', '2019 - Present'); ?></h5>
+        <p><em><?php echo get_theme_mod('resume_exp1_company', 'Experion, New York, NY'); ?></em></p>
+        <ul>
+          <?php
+          $exp1_tasks = explode("\n", get_theme_mod('resume_exp1_tasks'));
+          foreach ($exp1_tasks as $task) {
+            echo '<li>' . esc_html(trim($task)) . '</li>';
+          }
+          ?>
+        </ul>
       </div>
 
-      <!-- Right Column for Experience... You can replicate the same pattern -->
-       
-
+      <div class="resume-item">
+        <h4><?php echo get_theme_mod('resume_exp2_title', 'Graphic design specialist'); ?></h4>
+        <h5><?php echo get_theme_mod('resume_exp2_years', '2017 - 2018'); ?></h5>
+        <p><em><?php echo get_theme_mod('resume_exp2_company', 'Stepping Stone Advertising, New York, NY'); ?></em></p>
+        <ul>
+          <?php
+          $exp2_tasks = explode("\n", get_theme_mod('resume_exp2_tasks'));
+          foreach ($exp2_tasks as $task) {
+            echo '<li>' . esc_html(trim($task)) . '</li>';
+          }
+          ?>
+        </ul>
+      </div>
+      </div>
     </div>
   </div>
+
 </section>
