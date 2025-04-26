@@ -33,6 +33,8 @@
         $testimonial_name = get_theme_mod('testimonial_' . $i . '_name', 'Person Name');
         $testimonial_position = get_theme_mod('testimonial_' . $i . '_position', 'Position');
         $testimonial_image = get_theme_mod('testimonial_' . $i . '_image', '');
+        $testimonial_link = get_theme_mod('view_project_link' . $i . '_url', 'http://');
+
 
         if ($testimonial_text && $testimonial_name && $testimonial_position) {
       ?>
@@ -41,24 +43,20 @@
             <div class="row gy-4 justify-content-center">
               <div class="col-lg-6">
                 <div class="testimonial-content">
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    <span><?php echo esc_html($testimonial_text); ?></span>
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
+                  
                   <h3><?php echo esc_html($testimonial_name); ?></h3>
                   <h4><?php echo esc_html($testimonial_position); ?></h4>
-                  <div class="stars">
-                   
-                  </div>
+                 
                 </div>
               </div>
               <div class="col-lg-2 text-center">
                 <?php if ($testimonial_image) { ?>
-                  <img src="<?php echo esc_url($testimonial_image); ?>" alt="" class="img-fluid testimonial-img" >
+                  <a href="<?php echo esc_url($testimonial_link); ?>">
+                  <img src="<?php echo esc_url($testimonial_image); ?>" alt="" class="img-fluid testimonial-img" ></a>
                 <?php } ?>
               </div>
             </div>
+            
           </div>
         </div><!-- End testimonial item -->
       <?php } } ?>

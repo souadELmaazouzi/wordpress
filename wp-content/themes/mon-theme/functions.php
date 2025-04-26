@@ -532,6 +532,7 @@ function mytheme_customize_register( $wp_customize ) {
 }
 add_action('customize_register', 'mytheme_customize_register');
 function mythemes_customize_register($wp_customize) {
+  
     // Add About Section
     $wp_customize->add_section('about_section', array(
         'title'    => __('About Section', 'mytheme'),
@@ -562,7 +563,7 @@ function mythemes_customize_register($wp_customize) {
 
     // Profile Image
     $wp_customize->add_setting('profile_image', array(
-        'default'   => '',
+         'default'   => get_template_directory_uri() . '/assets/img/hero.jpeg', // set default image
         'transport' => 'refresh',
     ));
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'profile_image', array(
@@ -691,7 +692,7 @@ function custom_customize_register($wp_customize) {
 
     // Hero Background Image
     $wp_customize->add_setting('hero_bg_image', array(
-        'default' => '',
+        'default'   => get_template_directory_uri() . '/assets/img/hero.jpeg', // set default image
         'transport' => 'refresh',
     ));
     $wp_customize->add_control(new WP_Customize_Image_Control(
@@ -958,16 +959,7 @@ function customize_Projects_section($wp_customize) {
 
     // Add Customizable Testimonial Fields (you can add more fields for more testimonials)
     for ($i = 1; $i <= 4; $i++) {
-        // Testimonial Text
-        $wp_customize->add_setting('testimonial_' . $i . '_text', array(
-            'default'   => 'Testimonial text here...',
-            'transport' => 'refresh',
-        ));
-        $wp_customize->add_control('testimonial_' . $i . '_text', array(
-            'label'    => __('application  ' . $i . ' Text', 'your-theme'),
-            'section'  => 'Projects_section',
-            'type'     => 'textarea',
-        ));
+       
 
         // Testimonial Name
         $wp_customize->add_setting('testimonial_' . $i . '_name', array(
@@ -990,17 +982,36 @@ function customize_Projects_section($wp_customize) {
             'section'  => 'Projects_section',
             'type'     => 'text',
         ));
+      
+            $wp_customize->add_setting('view_project_link' . $i . '_url', array(
+                'default'   => 'http://',
+                'transport' => 'refresh',
+                'sanitize_callback' => 'esc_url_raw',
+            ));
+            $wp_customize->add_control('view_project_link' . $i . '_url', array(
+                'label'    => __('View Project Link ' . $i, 'your-theme'),
+                'section'  => 'Projects_section', 
+                'type'     => 'url',
+            ));
+        
+        
+// Testimonial Image Upload
+$wp_customize->add_setting('testimonial_' . $i . '_image', array(
+    'default'   => '',
+    'transport' => 'refresh',
+));
 
-        // Testimonial Image URL
-        $wp_customize->add_setting('testimonial_' . $i . '_image', array(
-            'default'   => '',
-            'transport' => 'refresh',
-        ));
-        $wp_customize->add_control('testimonial_' . $i . '_image', array(
-            'label'    => __('image ' . $i . ' Image URL', 'your-theme'),
-            'section'  => 'Projects_section',
-            'type'     => 'url',
-        ));
+$wp_customize->add_control(new WP_Customize_Image_Control(
+    $wp_customize,
+    'testimonial_' . $i . '_image',
+    array(
+        'label'    => __('Image ' . $i, 'your-theme'),
+        'section'  => 'Projects_section',
+        'settings' => 'testimonial_' . $i . '_image',
+    )
+));
+
+     
     }
 }
 add_action('customize_register', 'customize_Projects_section');
@@ -1044,3 +1055,20 @@ function handle_contact_form_submission() {
 }
 add_action('wp_ajax_send_contact_form', 'handle_contact_form_submission'); 
 add_action('wp_ajax_nopriv_send_contact_form', 'handle_contact_form_submission');
+
+function mytheme_customiz_register($wp_customize) {
+    // Add setting for nav hover color
+    $wp_customize->add_setting('nav_hover_color', array(
+        'default'           => '#ba7b15', // default color
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'refresh',
+    ));
+
+    // Add control (color picker)
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'nav_hover_color', array(
+        'label'    => __('themes colors ', 'your-theme'),
+        'section'  => 'colors', // or your own section
+        'settings' => 'nav_hover_color',
+    )));
+}
+add_action('customize_register', 'mytheme_customiz_register');
