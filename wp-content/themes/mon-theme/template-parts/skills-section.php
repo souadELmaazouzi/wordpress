@@ -14,6 +14,7 @@
         if ($name): ?>
           <div class="col-lg-6">
             <div class="progress">
+              
               <span class="skill">
                 <span><?php echo esc_html($name); ?></span> 
                 <i class="val"><?php echo esc_html($percent); ?>%</i>

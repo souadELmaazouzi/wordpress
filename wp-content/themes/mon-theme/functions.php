@@ -104,7 +104,7 @@ function mon_theme_styles()
     // Enqueue GLightbox CSS
     wp_enqueue_style('glightbox-css', get_template_directory_uri() . '/assets/vendor/glightbox/css/glightbox.min.css');
 
-    // Enqueue Bootstrap CSS (if you're using Bootstrap)
+    // Enqueue Bootstrap CSS (if you're using Bootstrapp)
     wp_enqueue_style('bootstrap-css', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
 
     // Enqueue Swiper CSS
