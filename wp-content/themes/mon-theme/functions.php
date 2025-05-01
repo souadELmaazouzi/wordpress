@@ -475,9 +475,9 @@ function mytheme_customize_register($wp_customize)
         'priority' => 30,
     ));
 
-    // Add setting for the number of service items
+    // Number of service items
     $wp_customize->add_setting('number_of_services', array(
-        'default'   => 4, // Default to 4 services
+        'default'   => 2,
         'transport' => 'refresh',
     ));
 
@@ -491,64 +491,63 @@ function mytheme_customize_register($wp_customize)
         ),
     ));
 
-    // Loop through the number of services selected by the user
-    $number_of_services = get_theme_mod('number_of_services', 3);
+    // Maximum number of service fields to prepare (let’s assume 10 max)
+    $max_services = 10;
 
-    for ($i = 1; $i <= $number_of_services; $i++) {
-        // Service Icon
-        $wp_customize->add_setting("service_item_{$i}_icon", array(
-            'default'   => 'bi bi-activity', // Default icon
-            'transport' => 'refresh',
-        ));
-        $wp_customize->add_control("service_item_{$i}_icon", array(
-            'label'   => __("Icon for Service Item $i", 'mytheme'),
-            'section' => 'services_section',
-            'type'    => 'text',
-        ));
-
-        // Service Title
+    for ($i = 1; $i <= $max_services; $i++) {
+        // Title
         $wp_customize->add_setting("service_item_{$i}_title", array(
-            'default'   => "Service $i",
+            'default'   => '',
             'transport' => 'refresh',
         ));
         $wp_customize->add_control("service_item_{$i}_title", array(
             'label'   => __("Title for Service Item $i", 'mytheme'),
             'section' => 'services_section',
             'type'    => 'text',
+            'active_callback' => function () use ($i) {
+                return get_theme_mod('number_of_services', 2) >= $i;
+            },
         ));
 
-        // Service Description
+        // Description
         $wp_customize->add_setting("service_item_{$i}_description", array(
-            'default'   => "Description for Service Item $i",
+            'default'   => '',
             'transport' => 'refresh',
         ));
         $wp_customize->add_control("service_item_{$i}_description", array(
             'label'   => __("Description for Service Item $i", 'mytheme'),
             'section' => 'services_section',
             'type'    => 'textarea',
+            'active_callback' => function () use ($i) {
+                return get_theme_mod('number_of_services', 2) >= $i;
+            },
         ));
-
-        // Service Link
-        $wp_customize->add_setting("service_item_{$i}_link", array(
-            'default'   => '#',
+        // Icon
+        $wp_customize->add_setting("service_item_{$i}_icon", array(
+            'default'   => 'bi bi-activity',
             'transport' => 'refresh',
         ));
-        $wp_customize->add_control("service_item_{$i}_link", array(
-            'label'   => __("Link for Service Item $i", 'mytheme'),
+        $wp_customize->add_control("service_item_{$i}_icon", array(
+            'label'   => __("Icon class for Service Item $i (e.g. bi bi-activity)", 'mytheme'),
             'section' => 'services_section',
-            'type'    => 'url',
+            'type'    => 'text',
+            'active_callback' => function () use ($i) {
+                return get_theme_mod('number_of_services', 2) >= $i;
+            },
         ));
-        // Service Details Image
+        // Details Image
         $wp_customize->add_setting("service_item_{$i}_details_image", array(
-            'default'   => '',
+            'default'   => 'assets/img/services.jpg',
             'transport' => 'refresh',
         ));
         $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "service_item_{$i}_details_image", array(
-            'label'    => __("Image for Service Item $i (Details)", 'mytheme'),
-            'section'  => 'services_section',
+            'label'   => __("Details Image for Service Item $i", 'mytheme'),
+            'section' => 'services_section',
+            'active_callback' => function () use ($i) {
+                return get_theme_mod('number_of_services', 2) >= $i;
+            },
         )));
-
-        // Service Details Title
+        // Details Title
         $wp_customize->add_setting("service_item_{$i}_details_title", array(
             'default'   => "Detail Title $i",
             'transport' => 'refresh',
@@ -557,32 +556,23 @@ function mytheme_customize_register($wp_customize)
             'label'   => __("Details Title for Service Item $i", 'mytheme'),
             'section' => 'services_section',
             'type'    => 'text',
+            'active_callback' => function () use ($i) {
+                return get_theme_mod('number_of_services', 2) >= $i;
+            },
         ));
-
-        // Main Paragraph
+        // Details Paragraph
         $wp_customize->add_setting("service_item_{$i}_paragraph", array(
             'default'   => "Main paragraph for service $i.",
             'transport' => 'refresh',
         ));
         $wp_customize->add_control("service_item_{$i}_paragraph", array(
-            'label'   => __("Main Paragraph for Service Item $i", 'mytheme'),
+            'label'   => __("Details Paragraph for Service Item $i", 'mytheme'),
             'section' => 'services_section',
             'type'    => 'textarea',
+            'active_callback' => function () use ($i) {
+                return get_theme_mod('number_of_services', 2) >= $i;
+            },
         ));
-
-        // Bullet Points
-        for ($j = 1; $j <= 3; $j++) {
-            $wp_customize->add_setting("service_item_{$i}_bullet_{$j}", array(
-                'default'   => "Bullet point $j for service $i",
-                'transport' => 'refresh',
-            ));
-            $wp_customize->add_control("service_item_{$i}_bullet_{$j}", array(
-                'label'   => __("Bullet Point $j for Service Item $i", 'mytheme'),
-                'section' => 'services_section',
-                'type'    => 'text',
-            ));
-        }
-
         // Extra Paragraph
         $wp_customize->add_setting("service_item_{$i}_extra_paragraph", array(
             'default'   => "Extra paragraph for service $i.",
@@ -592,7 +582,52 @@ function mytheme_customize_register($wp_customize)
             'label'   => __("Extra Paragraph for Service Item $i", 'mytheme'),
             'section' => 'services_section',
             'type'    => 'textarea',
+            'active_callback' => function () use ($i) {
+                return get_theme_mod('number_of_services', 2) >= $i;
+            },
         ));
+        // Bullet Point 1
+$wp_customize->add_setting("service_item_{$i}_bullet_1", array(
+    'default'   => "Default bullet 1",
+    'transport' => 'refresh',
+));
+$wp_customize->add_control("service_item_{$i}_bullet_1", array(
+    'label'   => __("Bullet Point 1 for Service Item $i", 'mytheme'),
+    'section' => 'services_section',
+    'type'    => 'text',
+    'active_callback' => function() use ($i) {
+        return get_theme_mod('number_of_services', 2) >= $i;
+    },
+));
+
+// Bullet Point 2
+$wp_customize->add_setting("service_item_{$i}_bullet_2", array(
+    'default'   => "Default bullet 2",
+    'transport' => 'refresh',
+));
+$wp_customize->add_control("service_item_{$i}_bullet_2", array(
+    'label'   => __("Bullet Point 2 for Service Item $i", 'mytheme'),
+    'section' => 'services_section',
+    'type'    => 'text',
+    'active_callback' => function() use ($i) {
+        return get_theme_mod('number_of_services', 2) >= $i;
+    },
+));
+
+// Bullet Point 3
+$wp_customize->add_setting("service_item_{$i}_bullet_3", array(
+    'default'   => "Default bullet 3",
+    'transport' => 'refresh',
+));
+$wp_customize->add_control("service_item_{$i}_bullet_3", array(
+    'label'   => __("Bullet Point 3 for Service Item $i", 'mytheme'),
+    'section' => 'services_section',
+    'type'    => 'text',
+    'active_callback' => function() use ($i) {
+        return get_theme_mod('number_of_services', 2) >= $i;
+    },
+));
+
     }
 }
 add_action('customize_register', 'mytheme_customize_register');

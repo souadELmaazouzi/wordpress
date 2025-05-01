@@ -36,60 +36,44 @@
             <h3><?php echo esc_html($title); ?></h3>
 
             <!-- Button to open modal -->
-            <a
-              href="#"
-              class="btn btn-primary mt-2 btn-view-details"
-              data-bs-toggle="modal"
-              data-bs-target="#serviceModal<?php echo $i; ?>">
-              View Details
-            </a>
+            <a href="#" class="btn btn-primary mt-2 btn-view-details" data-bs-toggle="modal" data-bs-target="#serviceModal<?php echo $i; ?>">
+  View Details
+</a>
 
             <!-- Description -->
             <p><?php echo esc_html($description); ?></p>
           </div>
         </div>
 
-        <!-- Modal for each service -->
         <div class="modal fade" id="serviceModal<?php echo $i; ?>" tabindex="-1" aria-labelledby="serviceModalLabel<?php echo $i; ?>" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="serviceModalLabel<?php echo $i; ?>"><?php echo esc_html($title); ?></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-
-                <section id="service-details" class="service-details section">
-
-                  <div class="container">
-
-                    <div class="row gy-5">
-
-
-
-                      <div class="col-lg-8 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
-                        <img src="<?php echo esc_url($details_image); ?>" alt="" class="img-fluid services-img">
-                        <h3><?php echo esc_html($details_title); ?></h3>
-                        <p><?php echo wp_kses_post($paragraph); ?></p>
-                        <ul>
-                          <li><i class="bi bi-check-circle"></i> <span><?php echo esc_html($bullet1); ?></span></li>
-                          <li><i class="bi bi-check-circle"></i> <span><?php echo esc_html($bullet2); ?></span></li>
-                          <li><i class="bi bi-check-circle"></i> <span><?php echo esc_html($bullet3); ?></span></li>
-                        </ul>
-                        <p><?php echo wp_kses_post($extra_paragraph); ?></p>
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                </section><!-- /Service Details Section -->
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="serviceModalLabel<?php echo $i; ?>"><?php echo esc_html($title); ?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <section id="service-details" class="service-details section">
+          <div class="container">
+            <div class="row gy-5">
+              <div class="col-lg-8 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
+                <img src="<?php echo esc_url($details_image); ?>" alt="" class="img-fluid services-img">
+                <h3><?php echo esc_html($details_title); ?></h3>
+                <p><?php echo wp_kses_post($paragraph); ?></p>
+                <ul>
+                  <li><i class="bi bi-check-circle"></i> <span><?php echo esc_html($bullet1); ?></span></li>
+                  <li><i class="bi bi-check-circle"></i> <span><?php echo esc_html($bullet2); ?></span></li>
+                  <li><i class="bi bi-check-circle"></i> <span><?php echo esc_html($bullet3); ?></span></li>
+                </ul>
+                <p><?php echo wp_kses_post($extra_paragraph); ?></p>
               </div>
             </div>
           </div>
-        </div>
-        <!-- End Modal -->
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
 
       <?php
       }
