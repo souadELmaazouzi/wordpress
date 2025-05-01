@@ -66,26 +66,31 @@ function custommenu_customize_register($wp_customize)
         'priority' => 30,
     ));
 
-    // Get all registered menus
-    $locations = get_registered_nav_menus();
+    $locations = get_nav_menu_locations(); // Get all menu locations
 
-    // Loop through each menu location to add an icon setting for each item
-    foreach ($locations as $location => $description) {
-        $menu_items = wp_get_nav_menu_items($location);
-
-        foreach ($menu_items as $item) {
-            $wp_customize->add_setting('menu_icon_' . $item->ID, array(
-                'default' => '',
-                'sanitize_callback' => 'sanitize_text_field',
-                'transport' => 'refresh',
-            ));
-
-            $wp_customize->add_control('menu_icon_' . $item->ID, array(
-                'label'       => __('Icon for ' . $item->title, 'your-theme'),
-                'section'     => 'menu_icons_section',
-                'type'        => 'text',
-                'description' => __('Enter a Font Awesome or Bootstrap icon class, e.g., "bi-house" or "bi-person".'),
-            ));
+    foreach ($locations as $location => $menu_id) {
+        $menu = wp_get_nav_menu_object($menu_id); // Get the menu object from location
+        if (!$menu) {
+            continue; // Skip if no menu assigned to this location
+        }
+        
+        $menu_items = wp_get_nav_menu_items($menu->term_id); // Now get items properly
+    
+        if ($menu_items) {
+            foreach ($menu_items as $item) {
+                $wp_customize->add_setting('menu_icon_' . $item->ID, array(
+                    'default' => '',
+                    'sanitize_callback' => 'sanitize_text_field',
+                    'transport' => 'refresh',
+                ));
+    
+                $wp_customize->add_control('menu_icon_' . $item->ID, array(
+                    'label'       => __('Icon for ' . $item->title, 'your-theme'),
+                    'section'     => 'menu_icons_section',
+                    'type'        => 'text',
+                    'description' => __('Enter a Font Awesome or Bootstrap icon class, e.g., "bi-house" or "bi-person".'),
+                ));
+            }
         }
     }
 }
