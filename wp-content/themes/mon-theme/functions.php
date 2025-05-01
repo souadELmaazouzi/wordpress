@@ -3,13 +3,15 @@
 // Enregistrer les menus
 
 // Ajouter le support des images à la une
-function register_my_menus() {
+function register_my_menus()
+{
     register_nav_menus(array(
         'header-menu' => __('Header Menu', 'your-theme'),
     ));
 }
 add_action('init', 'register_my_menus');
-function theme_custom_logo_setup() {
+function theme_custom_logo_setup()
+{
     add_theme_support('custom-logo', array(
         'height'      => 100,
         'width'       => 250,
@@ -25,11 +27,13 @@ add_theme_support('custom-header', array(
     'flex-width'    => true,
     'flex-height'   => true,
 ));
-class Custom_Nav_Walker extends Walker_Nav_Menu {
-    function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+class Custom_Nav_Walker extends Walker_Nav_Menu
+{
+    function start_el(&$output, $item, $depth = 0, $args = null, $id = 0)
+    {
         $icon_class = get_theme_mod('menu_icon_' . $item->ID, ''); // Retrieve custom icon class from customizer
         $output .= '<li class="menu-item"><a href="' . esc_url($item->url) . '">';
-        
+
         // Display the icon if available
         if ($icon_class) {
             $output .= '<i class="' . esc_attr($icon_class) . ' navicon"></i> ';
@@ -48,12 +52,14 @@ add_theme_support('custom-header', array(
     'flex-height'   => true,
 ));
 
-function mon_theme_support() {
+function mon_theme_support()
+{
     add_theme_support('post-thumbnails'); // Permet d'ajouter des images à la une
 }
 add_action('after_setup_theme', 'mon_theme_support');
 // Register Customizer Section for Menu Icons
-function custommenu_customize_register($wp_customize) {
+function custommenu_customize_register($wp_customize)
+{
     // Create a new section for Menu Icons in Customizer
     $wp_customize->add_section('menu_icons_section', array(
         'title'    => __('Menu Icons', 'your-theme'),
@@ -62,11 +68,11 @@ function custommenu_customize_register($wp_customize) {
 
     // Get all registered menus
     $locations = get_registered_nav_menus();
-    
+
     // Loop through each menu location to add an icon setting for each item
     foreach ($locations as $location => $description) {
         $menu_items = wp_get_nav_menu_items($location);
-        
+
         foreach ($menu_items as $item) {
             $wp_customize->add_setting('menu_icon_' . $item->ID, array(
                 'default' => '',
@@ -88,68 +94,72 @@ add_action('customize_register', 'custommenu_customize_register');
 
 
 // Enregistrer les styles et scripts
-function mon_theme_styles() {
+function mon_theme_styles()
+{
     // Enqueue GLightbox CSS
     wp_enqueue_style('glightbox-css', get_template_directory_uri() . '/assets/vendor/glightbox/css/glightbox.min.css');
-    
+
     // Enqueue Bootstrap CSS (if you're using Bootstrap)
     wp_enqueue_style('bootstrap-css', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
-    
+
     // Enqueue Swiper CSS
     wp_enqueue_style('swiper-css', get_template_directory_uri() . '/assets/vendor/swiper/swiper-bundle.min.css');
-    
+
     // Enqueue Bootstrap Icons
     wp_enqueue_style('bootstrap-icons', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css');
-    
+
     // Enqueue main theme styles
     wp_enqueue_style('mon-theme-style', get_stylesheet_uri());
 }
 add_action('wp_enqueue_scripts', 'mon_theme_styles');
 
 // Enregistrer les scripts JavaScript
-function mon_theme_scripts() {
+function mon_theme_scripts()
+{
     // Enqueue Swiper JS
     wp_enqueue_script('swiper-js', get_template_directory_uri() . '/assets/vendor/swiper/swiper-bundle.min.js', array(), '', true);
-    
+
     // Enqueue AOS (Animate On Scroll) JS
     wp_enqueue_script('aos-js', 'https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js', array(), null, true);
-    
+
     // Enqueue Bootstrap JS
     wp_enqueue_script('mon-theme-bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', array('jquery'), '', true);
-    
+
     // Enqueue PHP email form validation script
     wp_enqueue_script('php-email-form-js', get_template_directory_uri() . '/assets/vendor/php-email-form/validate.js', array(), '', true);
-    
+
     // Enqueue Typed.js
     wp_enqueue_script('typed-js', get_template_directory_uri() . '/assets/vendor/typed.js/typed.umd.js', array(), '', true);
-    
+
     // Enqueue PureCounter.js
     wp_enqueue_script('purecounter-js', get_template_directory_uri() . '/assets/vendor/purecounter/purecounter_vanilla.js', array(), '', true);
-    
+
     // Enqueue Waypoints.js
     wp_enqueue_script('waypoints-js', get_template_directory_uri() . '/assets/vendor/waypoints/noframework.waypoints.js', array(), '', true);
-    
+
     // Enqueue GLightbox.js
     wp_enqueue_script('glightbox-js', get_template_directory_uri() . '/assets/vendor/glightbox/js/glightbox.min.js', array(), '', true);
-    
+
     // Enqueue ImagesLoaded.js
     wp_enqueue_script('imagesloaded-js', get_template_directory_uri() . '/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js', array(), '', true);
-    
+
     // Enqueue Isotope.js
     wp_enqueue_script('isotope-js', get_template_directory_uri() . '/assets/vendor/isotope-layout/isotope.pkgd.min.js', array(), '', true);
-    
+
     // Enqueue your custom JavaScript file (main.js)
     wp_enqueue_script('mon-theme-main-js', get_template_directory_uri() . '/main.js', array('jquery', 'mon-theme-bootstrap'), '', true);
 }
 add_action('wp_enqueue_scripts', 'mon_theme_scripts');
 
 // Add Favicons
-function mon_theme_favicons() {
+function mon_theme_favicons()
+{
     echo '<link href="' . get_template_directory_uri() . '/assets/img/favicon.png" rel="icon">';
     echo '<link href="' . get_template_directory_uri() . '/assets/img/apple-touch-icon.png" rel="apple-touch-icon">';
 }
 add_action('wp_head', 'mon_theme_favicons');
-function customize_resume_section($wp_customize) {
+function customize_resume_section($wp_customize)
+{
 
     // Section
     $wp_customize->add_section('resume_section', array(
@@ -230,7 +240,7 @@ function customize_resume_section($wp_customize) {
     ));
 
     // === Education and Experience would follow the same way...
-        // === Education ===
+    // === Education ===
     // Education Item 1
     $wp_customize->add_setting('resume_edu1_title', array(
         'default' => 'Master of Fine Arts & Graphic Design',
@@ -312,7 +322,7 @@ function customize_resume_section($wp_customize) {
         'section' => 'resume_section',
         'type' => 'textarea',
     ));
-        // === Experience ===
+    // === Experience ===
     // Experience 1
     $wp_customize->add_setting('resume_exp1_title', array(
         'default' => 'Senior graphic design specialist',
@@ -394,12 +404,11 @@ function customize_resume_section($wp_customize) {
         'section' => 'resume_section',
         'type' => 'textarea',
     ));
-
-
 }
 add_action('customize_register', 'customize_resume_section');
 // === Skills Section ===
-function customize_skills_settings($wp_customize) {
+function customize_skills_settings($wp_customize)
+{
     // Add Skills section
     $wp_customize->add_section('skills_section', array(
         'title' => __('Skills', 'yourtheme'),
@@ -458,9 +467,10 @@ function customize_skills_settings($wp_customize) {
     }
 }
 add_action('customize_register', 'customize_skills_settings');
-function mytheme_customize_register( $wp_customize ) {
+function mytheme_customize_register($wp_customize)
+{
     // Add section for services
-    $wp_customize->add_section( 'services_section', array(
+    $wp_customize->add_section('services_section', array(
         'title'    => __('Services Section', 'mytheme'),
         'priority' => 30,
     ));
@@ -528,11 +538,67 @@ function mytheme_customize_register( $wp_customize ) {
             'section' => 'services_section',
             'type'    => 'url',
         ));
+        // Service Details Image
+        $wp_customize->add_setting("service_item_{$i}_details_image", array(
+            'default'   => '',
+            'transport' => 'refresh',
+        ));
+        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "service_item_{$i}_details_image", array(
+            'label'    => __("Image for Service Item $i (Details)", 'mytheme'),
+            'section'  => 'services_section',
+        )));
+
+        // Service Details Title
+        $wp_customize->add_setting("service_item_{$i}_details_title", array(
+            'default'   => "Detail Title $i",
+            'transport' => 'refresh',
+        ));
+        $wp_customize->add_control("service_item_{$i}_details_title", array(
+            'label'   => __("Details Title for Service Item $i", 'mytheme'),
+            'section' => 'services_section',
+            'type'    => 'text',
+        ));
+
+        // Main Paragraph
+        $wp_customize->add_setting("service_item_{$i}_paragraph", array(
+            'default'   => "Main paragraph for service $i.",
+            'transport' => 'refresh',
+        ));
+        $wp_customize->add_control("service_item_{$i}_paragraph", array(
+            'label'   => __("Main Paragraph for Service Item $i", 'mytheme'),
+            'section' => 'services_section',
+            'type'    => 'textarea',
+        ));
+
+        // Bullet Points
+        for ($j = 1; $j <= 3; $j++) {
+            $wp_customize->add_setting("service_item_{$i}_bullet_{$j}", array(
+                'default'   => "Bullet point $j for service $i",
+                'transport' => 'refresh',
+            ));
+            $wp_customize->add_control("service_item_{$i}_bullet_{$j}", array(
+                'label'   => __("Bullet Point $j for Service Item $i", 'mytheme'),
+                'section' => 'services_section',
+                'type'    => 'text',
+            ));
+        }
+
+        // Extra Paragraph
+        $wp_customize->add_setting("service_item_{$i}_extra_paragraph", array(
+            'default'   => "Extra paragraph for service $i.",
+            'transport' => 'refresh',
+        ));
+        $wp_customize->add_control("service_item_{$i}_extra_paragraph", array(
+            'label'   => __("Extra Paragraph for Service Item $i", 'mytheme'),
+            'section' => 'services_section',
+            'type'    => 'textarea',
+        ));
     }
 }
 add_action('customize_register', 'mytheme_customize_register');
-function mythemes_customize_register($wp_customize) {
-  
+function mythemes_customize_register($wp_customize)
+{
+
     // Add About Section
     $wp_customize->add_section('about_section', array(
         'title'    => __('About Section', 'mytheme'),
@@ -563,7 +629,7 @@ function mythemes_customize_register($wp_customize) {
 
     // Profile Image
     $wp_customize->add_setting('profile_image', array(
-         'default'   => get_template_directory_uri() . '/assets/img/hero.jpeg', // set default image
+        'default'   => get_template_directory_uri() . '/assets/img/hero.jpeg', // set default image
         'transport' => 'refresh',
     ));
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'profile_image', array(
@@ -683,7 +749,8 @@ function mythemes_customize_register($wp_customize) {
     ));
 }
 add_action('customize_register', 'mythemes_customize_register');
-function custom_customize_register($wp_customize) {
+function custom_customize_register($wp_customize)
+{
     // Hero Section Title
     $wp_customize->add_section('hero_section', array(
         'title' => __('Hero Section', 'your-theme'),
@@ -696,7 +763,9 @@ function custom_customize_register($wp_customize) {
         'transport' => 'refresh',
     ));
     $wp_customize->add_control(new WP_Customize_Image_Control(
-        $wp_customize, 'hero_bg_image', array(
+        $wp_customize,
+        'hero_bg_image',
+        array(
             'label' => __('Hero Background Image', 'your-theme'),
             'section' => 'hero_section',
             'settings' => 'hero_bg_image',
@@ -771,7 +840,8 @@ function custom_customize_register($wp_customize) {
 }
 add_action('customize_register', 'custom_customize_register');
 // footer 
-function customs_customize_register($wp_customize) {
+function customs_customize_register($wp_customize)
+{
     // Footer Section
     $wp_customize->add_section('footer_section', array(
         'title' => __('Footer Section', 'your-theme'),
@@ -864,7 +934,8 @@ function customs_customize_register($wp_customize) {
     ));
 }
 add_action('customize_register', 'customs_customize_register');
-function customContact_customize_register($wp_customize) {
+function customContact_customize_register($wp_customize)
+{
     // Contact Section
     $wp_customize->add_section('contact_section', array(
         'title' => __('Contact Section', 'your-theme'),
@@ -928,7 +999,8 @@ function customContact_customize_register($wp_customize) {
     ));
 }
 add_action('customize_register', 'customContact_customize_register');
-function customize_Projects_section($wp_customize) {
+function customize_Projects_section($wp_customize)
+{
     // Add Section for Testimonials
     $wp_customize->add_section('Projects_section', array(
         'title'    => __('Projets', 'your-theme'),
@@ -959,7 +1031,7 @@ function customize_Projects_section($wp_customize) {
 
     // Add Customizable Testimonial Fields (you can add more fields for more testimonials)
     for ($i = 1; $i <= 4; $i++) {
-       
+
 
         // Testimonial Name
         $wp_customize->add_setting('testimonial_' . $i . '_name', array(
@@ -982,47 +1054,47 @@ function customize_Projects_section($wp_customize) {
             'section'  => 'Projects_section',
             'type'     => 'text',
         ));
-      
-            $wp_customize->add_setting('view_project_link' . $i . '_url', array(
-                'default'   => 'http://',
-                'transport' => 'refresh',
-                'sanitize_callback' => 'esc_url_raw',
-            ));
-            $wp_customize->add_control('view_project_link' . $i . '_url', array(
-                'label'    => __('View Project Link ' . $i, 'your-theme'),
-                'section'  => 'Projects_section', 
-                'type'     => 'url',
-            ));
-        
-        
-// Testimonial Image Upload
-$wp_customize->add_setting('testimonial_' . $i . '_image', array(
-    'default'   => '',
-    'transport' => 'refresh',
-));
 
-$wp_customize->add_control(new WP_Customize_Image_Control(
-    $wp_customize,
-    'testimonial_' . $i . '_image',
-    array(
-        'label'    => __('Image ' . $i, 'your-theme'),
-        'section'  => 'Projects_section',
-        'settings' => 'testimonial_' . $i . '_image',
-    )
-));
+        $wp_customize->add_setting('view_project_link' . $i . '_url', array(
+            'default'   => 'http://',
+            'transport' => 'refresh',
+            'sanitize_callback' => 'esc_url_raw',
+        ));
+        $wp_customize->add_control('view_project_link' . $i . '_url', array(
+            'label'    => __('View Project Link ' . $i, 'your-theme'),
+            'section'  => 'Projects_section',
+            'type'     => 'url',
+        ));
 
-     
+
+        // Testimonial Image Upload
+        $wp_customize->add_setting('testimonial_' . $i . '_image', array(
+            'default'   => '',
+            'transport' => 'refresh',
+        ));
+
+        $wp_customize->add_control(new WP_Customize_Image_Control(
+            $wp_customize,
+            'testimonial_' . $i . '_image',
+            array(
+                'label'    => __('Image ' . $i, 'your-theme'),
+                'section'  => 'Projects_section',
+                'settings' => 'testimonial_' . $i . '_image',
+            )
+        ));
     }
 }
 add_action('customize_register', 'customize_Projects_section');
-function enqueue_contact_form_scripts() {
-    wp_enqueue_script( 'contact-form-ajax', get_template_directory_uri() . '/js/contact-form.js', array('jquery'), null, true );
-    wp_localize_script( 'contact-form-ajax', 'contact_form_ajax_obj', array(
-        'ajaxurl' => admin_url( 'admin-ajax.php' ),
+function enqueue_contact_form_scripts()
+{
+    wp_enqueue_script('contact-form-ajax', get_template_directory_uri() . '/js/contact-form.js', array('jquery'), null, true);
+    wp_localize_script('contact-form-ajax', 'contact_form_ajax_obj', array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
     ));
 }
-add_action( 'wp_enqueue_scripts', 'enqueue_contact_form_scripts' );
-function handle_contact_form_submission() {
+add_action('wp_enqueue_scripts', 'enqueue_contact_form_scripts');
+function handle_contact_form_submission()
+{
     // Sanitize and get form data
     $name    = sanitize_text_field($_POST['name']);
     $email   = sanitize_email($_POST['email']);
@@ -1053,10 +1125,11 @@ function handle_contact_form_submission() {
     // Always die to terminate the Ajax request
     wp_die();
 }
-add_action('wp_ajax_send_contact_form', 'handle_contact_form_submission'); 
+add_action('wp_ajax_send_contact_form', 'handle_contact_form_submission');
 add_action('wp_ajax_nopriv_send_contact_form', 'handle_contact_form_submission');
 
-function mytheme_customiz_register($wp_customize) {
+function mytheme_customiz_register($wp_customize)
+{
     // Add setting for nav hover color
     $wp_customize->add_setting('nav_hover_color', array(
         'default'           => '#ba7b15', // default color

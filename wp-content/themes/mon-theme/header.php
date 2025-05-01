@@ -3,7 +3,7 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php wp_head(); ?> <!-- Ensure styles and scripts are loaded -->
     <style>
@@ -19,17 +19,7 @@
     <!-- Toggle button for mobile -->
     <i class="header-toggle d-xl-none bi bi-list"></i>
 
-    <!-- Logo (if available) -->
-    <div class="header-logo">
-        <a href="<?php echo home_url(); ?>">
-            <?php 
-            if (has_custom_logo()) {
-                the_custom_logo(); 
-            } else { ?>
-                <h1><?php bloginfo('name'); ?></h1>
-            <?php } ?>
-        </a>
-    </div>
+    
 
     <nav id="navmenu" class="navmenu">
 <?php 

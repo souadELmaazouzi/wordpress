@@ -34,7 +34,7 @@ get_header();  // Include header template
  <?php get_template_part('template-parts/Resume-section'); ?>
 <!-- /Resume Section -->
 <!-- Testimonials Section -->
-<?php get_template_part('template-parts/Testimonials-section'); ?>
+<?php get_template_part('template-parts/Project-section'); ?>
 <!-- /Testimonials Section -->
 <!-- Services Section -->
 <?php get_template_part('template-parts/service-section'); ?>

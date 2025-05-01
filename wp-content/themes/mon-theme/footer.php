@@ -13,7 +13,7 @@
                 <span>Copyright</span> <strong class="px-1 sitename"><?php echo esc_html(get_theme_mod('footer_site_name', get_bloginfo('name'))); ?></strong> <span><?php echo esc_html(get_theme_mod('footer_copyright', 'All Rights Reserved')); ?></span>
             </div>
             <div class="credits">
-                <?php echo esc_html(get_theme_mod('footer_credits', 'Designed by Master SDA')); ?> Distributed by <a href="">souad</a>
+                <?php echo esc_html(get_theme_mod('footer_credits', 'Designed by Master SDA')); ?> Distributed by <a href="">Master's Students</a>
             </div>
         </div>
     </div>

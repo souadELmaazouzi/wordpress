@@ -38,10 +38,10 @@
       </div>
 
       <div class="col-lg-8">
-        <form  action="<?php echo esc_url( get_template_directory_uri() ); ?>/forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+        <form  action="https://api.web3forms.com/submit" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
 
           <div class="row gy-4">
-
+          <input type="hidden" name="access_key" value="aa469c4d-ff2e-4525-8905-ff4d3bd9b5b7">
             <div class="col-md-6">
               <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
             </div>
@@ -60,14 +60,14 @@
 
             <div class="col-md-12 text-center">
               <div class="loading">Loading</div>
-              <div class="error-message"></div>
+              <div class="error-message" style="display:none;color:red;"></div>
               <div class="sent-message">Your message has been sent. Thank you!</div>
 
               <button type="submit">Send Message</button>
             </div>
 
           </div>
-        </>
+        
       </div>
     </div>
   </div>
