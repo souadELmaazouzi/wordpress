@@ -1048,11 +1048,11 @@ function customize_Projects_section($wp_customize)
     ));
 
     // Add Title Setting
-    $wp_customize->add_setting('Projects_title', array(
+    $wp_customize->add_setting('Projects_titles', array(
         'default'   => 'Projects',
         'transport' => 'refresh',
     ));
-    $wp_customize->add_control('Projects_title', array(
+    $wp_customize->add_control('Projects_titles', array(
         'label'    => __('Section Title', 'your-theme'),
         'section'  => 'Projects_section',
         'type'     => 'text',
@@ -1060,7 +1060,7 @@ function customize_Projects_section($wp_customize)
 
     // Add Description Setting
     $wp_customize->add_setting('Project_description', array(
-        'default'   => 'Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit',
+        'default'   => '',
         'transport' => 'refresh',
     ));
     $wp_customize->add_control('Project_description', array(
