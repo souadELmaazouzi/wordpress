@@ -2,8 +2,8 @@
 
 <!-- Section Title -->
 <div class="container section-title" data-aos="fade-up">
-  <h2><?php echo get_theme_mod('testimonials_title', 'Testimonials'); ?></h2>
-  <p><?php echo get_theme_mod('testimonials_description', 'Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit'); ?></p>
+  <h2><?php echo get_theme_mod('Projects_title', 'Testimonials'); ?></h2>
+  <p><?php echo get_theme_mod('Project_description', 'Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit'); ?></p>
 </div><!-- End Section Title -->
 
 <div class="container" data-aos="fade-up" data-aos-delay="100">
